@@ -1,5 +1,6 @@
 var screenHeight = window.innerHeight;
 var screenWidth = window.innerWidth;
+
 class Main {
 	constructor() {
 		
@@ -13,23 +14,9 @@ class Main {
 
 		this.boy = this.createBoy();
 
-		this.scene = -1;
-		this.dialogues = [{
-			'type': 'intro',
-			'dialogue': 'Let\'s Learn something'
-		}, {
-			'type': 'intro',
-			'dialogue': 'YAYAYAYAYAY'
-		}
-		]
-
-		
-		SpeechBubble([
-			'Hey! <br> Welcome to CyberSafe. I am your friend ScriptKiddie',
-			'Do you find the world of internet amusing? Accessing tons of websites, emails daily.',
-			'Ever wondered how safe the internet is?',
-			'Before getting to the fun stuff, let\'s begin by signing you up'
-		],login);
+		this.scene = "intro";
+		console.log(speech);
+		SpeechBubble(speech['intro'], login);
 		
 		// this.button = Button('PLAY', {x: 350, y: 200}, 200, 100, ()=>{
 		// 		this.moveforward();
@@ -38,24 +25,22 @@ class Main {
 
 	}
 
-	getScene() {
-		if (this.dialogues[this.scene].type == 'intro') {
-			this.button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
-					this.moveforward();
-				});
-			this.stage.addChild(this.button);		
-			SpeechBubble([this.dialogues[this.scene].dialogue]);
-		}
-		if (this.dialogues[this.scene].type == 'signup') {
+	// getScene() {
+	// 	if (this.dialogues[this.scene].type == 'intro') {
+	// 		this.button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
+	// 				this.moveforward();
+	// 			});		
+	// 		SpeechBubble([this.dialogues[this.scene].dialogue]);
+	// 	}
+	// 	if (this.dialogues[this.scene].type == 'signup') {
 
-		}
-	}
+	// 	}
+	// }
 
 	moveforward() {
 		this.scrollSpeed = 10;
 		this.move = 100 * this.scrollSpeed;
 		this.wallsmoving = true;
-		this.stage.removeChild(this.button);
 		$('.speech-bubble').toggleClass('hide');
 		this.scene ++;
 	}

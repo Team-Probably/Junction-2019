@@ -38,9 +38,7 @@ function signedin(status)
     // var typewriter = new Typewriter(type_bubble, {
     //     loop: false
     // });
-    text = [
-			'Hey! <br> Welcome to CyberSafe. I am your friend ScriptKiddie'
-	]
+    text = speech['signedin'];
     $('.speech-bubble').html('');
     typewriter_actions = [{speed: 100}];//10
     for (var i = 0; i < text.length; i++) {
@@ -52,13 +50,7 @@ function signedin(status)
     // typewriter.start();
     // return true;
     
-    $('.speech-bubble')
-        .on('typewriteTyped', function (event, data) {
-        if(data==text[text.length - 1]){
-            console.log('typewrite has typed', data);
-            login();
-        }
-    }).typewrite({
+    $('.speech-bubble').typewrite({
             actions: typewriter_actions
         });
 

@@ -3,6 +3,8 @@ function login() {
     $('.login-modal').on('click', function()
     {
         console.log('login clicked');
-        signin(true);
+        $('.login-modal').toggleClass('hide');
+        
+        signedin(true);
     })
 }
