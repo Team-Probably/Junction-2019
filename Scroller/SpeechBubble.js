@@ -30,7 +30,7 @@ function SpeechBubble(text)
 
 }
 
-function signedin(text)
+function signedin(status)
 {
     // $('.speech-bubble').html(text);
     // var type_bubble = document.getElementsByClassName('speech-bubble')[0];
@@ -38,7 +38,10 @@ function signedin(text)
     // var typewriter = new Typewriter(type_bubble, {
     //     loop: false
     // });
-    
+    text = [
+			'Hey! <br> Welcome to CyberSafe. I am your friend ScriptKiddie'
+	]
+    $('.speech-bubble').html('');
     typewriter_actions = [{speed: 100}];//10
     for (var i = 0; i < text.length; i++) {
         typewriter_actions.push({type: text[i]});
