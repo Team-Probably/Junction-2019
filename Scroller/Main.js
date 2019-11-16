@@ -10,17 +10,35 @@ class Main {
 		this.playAnimatedSprite(this.animatedSprite);
 
 		this.boy = this.createBoy();
+		this.speechcont =  SpeechBubble('Hiii This is some huge text text text text');
+		this.speechcont.x = 200;
+		this.stage.addChild(this.speechcont);
+
+		var button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
+			this.moveforward();
+		});
+		
+		this.stage.addChild(button);
+
+	
 
 
 
 	}
+
+	moveforward()
+	{
+		this.scrollSpeed = 10;
+		this.move = 100 * this.scrollSpeed;
+		this.wallsmoving = true;
+	}
 	update() {
 		this.scroller.moveViewportXBy(this.scrollSpeed);
-		document.getElementById("mvforward").onmousedown =  () => {
-			this.scrollSpeed = 10;
-			this.move = 100 * this.scrollSpeed;
-			this.wallsmoving = true;
-		};
+		// document.getElementById("mvforward").onmousedown =  () => {
+		// 	this.scrollSpeed = 10;
+		// 	this.move = 100 * this.scrollSpeed;
+		// 	this.wallsmoving = true;
+		// };
 		if (this.move == 0) {
 			this.scrollSpeed = 0;
 			this.wallsmoving = false;
