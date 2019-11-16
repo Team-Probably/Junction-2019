@@ -44,7 +44,7 @@ class Main {
 	}
 
 	signedin(status) {
-		// $('.speech-bubble').toggleClass('hide');
+		$('.info-cards').toggleClass('hide');
 		console.log("hello");
 	}
 

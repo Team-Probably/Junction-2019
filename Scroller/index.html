@@ -14,6 +14,7 @@
 		</style>
 		<link rel="stylesheet" href="css/speech.css">
 		<link rel="stylesheet" href="css/login.css">
+		<link rel="stylesheet" href="css/cards.css">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script>
@@ -26,13 +27,29 @@
 			<div class="speech-bubble hide">
 			</div>
 			<div class="login-modal hide"></div>
-			<div class="info hide">
-				<ul>
-					<li>IP Address: <span></span></li>
-					<li>Location: <span></span></li>
-					<li>Device: <span></span></li>
-					<li>: <span></span></li>
-				</ul>
+			<div class="info-cards hide">
+				<div id="cards">
+					<div id="card1" class="current">
+						<div id="cardtitle">Demo Title</div>
+						<div id="cardcontent">
+							<span>
+								Location: Helsinki
+							</span>
+						</div>
+					</div>
+					<div id="card2" class="hide">
+						<div id="cardtitle">Title</div>
+						<div id="cardcontent">
+							<span>
+								Location: 
+							</span>
+						</div>
+					</div>
+				</div>
+				<div id="cardbuttons">
+					<div id="prev">Prev</div>
+					<div id="next">Next</div>
+				</div>
 			</div>
 			<!-- <div style="background-color: aqua;;">
 				<div id="mvforward" style="cursor: crosshair;">Forward</div>
@@ -51,22 +68,9 @@
 		<!-- <script src="SpeechBubble.js"></script> -->
 		<!-- <script src="login.js"></script> -->
 		<script src="Button.js"></script>
+		<script src="cards.js"></script>
 		<script src="Main.js"></script>
 
-		<!-- <iframe style="position:fixed;bottom:0;z-index:10;" src="./What every Browser knows about you_files/saved_resource(2).html" height="50" width="100%" frameborder="0"></iframe> -->
-    	<!-- <script src="./What every Browser knows about you_files/iso639.js"></script> -->
-    	<!-- <script src="./What every Browser knows about you_files/google-geolocation.js"></script> -->
-    	<!-- <script src="./What every Browser knows about you_files/ua-parser.js"></script>
-    	1<script src="./What every Browser knows about you_files/device.js"></script>
-    	<!-- <script src="./What every Browser knows about you_files/network-scanner.js"></script> -->
- 		<!-- <script src="./What every Browser knows about you_files/ip.js"></script>
-		<script src="./What every Browser knows about you_files/social-media.js"></script> --> -->
-		<!-- <script src="./What every Browser knows about you_files/exif.js"></script> -->
-		<!-- <script src="./What every Browser knows about you_files/images.js"></script> -->
-		<!-- <script src="./What every Browser knows about you_files/gyroscope.js"></script> -->
-		<!-- <script src="./What every Browser knows about you_files/speedtest.js"></script> -->
-
-		
 		<script>
 			function init() {
 				main = new Main();
