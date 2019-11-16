@@ -1,9 +1,8 @@
 var screenHeight = window.innerHeight;
 var screenWidth = window.innerWidth;
-
+var scene = "intro";
 class Main {
 	constructor() {
-		
 		this.stage = new PIXI.Container();
 		this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { view: document.getElementById("game-canvas") });
 		this.scrollSpeed = 0;
@@ -15,36 +14,65 @@ class Main {
 		this.boy = this.createBoy();
 
 		this.scene = "intro";
-		console.log(speech);
-		SpeechBubble(speech['intro'], login);
-		
-		// this.button = Button('PLAY', {x: 350, y: 200}, 200, 100, ()=>{
-		// 		this.moveforward();
-		// 	});
-		this.stage.addChild(this.button);
-
+		this.SpeechBubble(speech[this.scene]['dialogues'], this.scene);
 	}
 
-	// getScene() {
-	// 	if (this.dialogues[this.scene].type == 'intro') {
-	// 		this.button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
-	// 				this.moveforward();
-	// 			});		
-	// 		SpeechBubble([this.dialogues[this.scene].dialogue]);
-	// 	}
-	// 	if (this.dialogues[this.scene].type == 'signup') {
+	getScene() {
+		this.SpeechBubble(speech[this.scene]['dialogues'], this.scene);	
+	}
 
-	// 	}
-	// }
-
+	changeScene() {
+		this.scene = speech[this.scene]['next'];
+		this.moveforward();
+	}
+	
 	moveforward() {
 		this.scrollSpeed = 10;
 		this.move = 100 * this.scrollSpeed;
 		this.wallsmoving = true;
-		$('.speech-bubble').toggleClass('hide');
-		this.scene ++;
 	}
-	
+		
+	login() {
+		$('.login-modal').toggleClass('hide');
+		$('.login-modal').on('click', () =>
+		{
+			console.log('login clicked');
+			$('.speech-bubble').toggleClass('hide');
+			$('.login-modal').toggleClass('hide');
+			this.changeScene();
+		});
+	}
+
+	signedin(status) {
+		$('.info-cards').toggleClass('hide');
+		console.log("hello");
+	}
+
+	SpeechBubble(text, scene){
+		$('.speech-bubble').toggleClass('hide');
+
+		let typewriter_actions = [{speed: 100}];//10
+		for (var i = 0; i < text.length; i++) {
+			typewriter_actions.push({type: text[i]});
+			typewriter_actions.push({delay: 20});//2000
+			typewriter_actions.push({remove: {num: text[i].length, type: 'whole'}});
+		}
+		typewriter_actions.pop();
+		
+		$('.speech-bubble')
+			.on('typewriteTyped', (event, data) => {
+			if(data==text[text.length - 1]){
+				console.log("Speech completed", scene);
+				if(scene=='intro')
+					this.login();
+				if(scene=='signedin')
+					this.signedin(true);
+			}
+		}).typewrite({
+				actions: typewriter_actions
+			});
+	}
+
 	update() {
 		this.scroller.moveViewportXBy(this.scrollSpeed);
 		if (this.move == 0 && this.wallsmoving==true) {
@@ -122,6 +150,5 @@ class Main {
 	getScenePos()
 	{
 		return this.scroller.getViewportX() / 1000;
-
 	}
 }

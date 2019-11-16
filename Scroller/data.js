@@ -16,7 +16,7 @@ var speech = {
         "Every website you visit know's all of this about you"
         ],
         "next": "hack_info",
-    }
+    },
     "data":[{
         "type": "intro",
         "dialogue":"Hey!! Welcome to CyberSafety",
