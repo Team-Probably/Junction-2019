@@ -1,3 +1,5 @@
+var screenHeight = window.innerHeight;
+var screenWidth = window.innerWidth;
 class Main {
 	constructor() {
 		
@@ -10,45 +12,64 @@ class Main {
 		this.playAnimatedSprite(this.animatedSprite);
 
 		this.boy = this.createBoy();
-		this.speechcont =  SpeechBubble('Hiii This is some huge text text text text');
-		this.speechcont.x = 200;
-		this.stage.addChild(this.speechcont);
 
-		var button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
-			this.moveforward();
-		});
+		this.scene = -1;
+		this.dialogues = [{
+			'type': 'intro',
+			'dialogue': 'Let\'s Learn something'
+		}, {
+			'type': 'intro',
+			'dialogue': 'YAYAYAYAYAY'
+		}
+		]
+
 		
-		this.stage.addChild(button);
-
-	
-
-
+		SpeechBubble([
+			'Hey! <br> Welcome to CyberSafe. I am your friend ScriptKiddie',
+			'Do you find the world of internet amusing? Accessing tons of websites, emails daily.',
+			'Ever wondered how safe the internet is?',
+			'Before getting to the fun stuff, let\'s begin by signing you up'
+		],login);
+		
+		// this.button = Button('PLAY', {x: 350, y: 200}, 200, 100, ()=>{
+		// 		this.moveforward();
+		// 	});
+		this.stage.addChild(this.button);
 
 	}
 
-	moveforward()
-	{
+	getScene() {
+		if (this.dialogues[this.scene].type == 'intro') {
+			this.button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
+					this.moveforward();
+				});
+			this.stage.addChild(this.button);		
+			SpeechBubble([this.dialogues[this.scene].dialogue]);
+		}
+		if (this.dialogues[this.scene].type == 'signup') {
+
+		}
+	}
+
+	moveforward() {
 		this.scrollSpeed = 10;
 		this.move = 100 * this.scrollSpeed;
 		this.wallsmoving = true;
+		this.stage.removeChild(this.button);
+		$('.speech-bubble').toggleClass('hide');
+		this.scene ++;
 	}
+	
 	update() {
 		this.scroller.moveViewportXBy(this.scrollSpeed);
-		// document.getElementById("mvforward").onmousedown =  () => {
-		// 	this.scrollSpeed = 10;
-		// 	this.move = 100 * this.scrollSpeed;
-		// 	this.wallsmoving = true;
-		// };
-		if (this.move == 0) {
+		if (this.move == 0 && this.wallsmoving==true) {
 			this.scrollSpeed = 0;
 			this.wallsmoving = false;
-
+			this.getScene();
 		} else {
 			this.move -= this.scrollSpeed;
 		}
 		this.renderer.render(this.stage);
-		
-
 		
 		this.stage.removeChild(this.animatedSprite);
 		this.stage.removeChild(this.boy);
@@ -57,10 +78,10 @@ class Main {
 		else
 			this.stage.addChild(this.boy);
 		
-		
-		
+		//move everything 
 		requestAnimationFrame(this.update.bind(this));
 	}
+
 	loadSpriteSheet() {
 		var loader = PIXI.loader;
 		loader.add("wall", "resources/wall.json");
@@ -73,8 +94,7 @@ class Main {
 		requestAnimationFrame(this.update.bind(this));
 	}
 
-	getAnimatedSprite()
-	{
+	getAnimatedSprite() {
 		let textureArray = [];
 
 		for (let i=0; i < 15; i++)
@@ -91,24 +111,24 @@ class Main {
 	playAnimatedSprite(animatedSprite)
 	{
 		animatedSprite.x = 100;
-		animatedSprite.y = MapBuilder.WALL_HEIGHTS[0] + 50;
+		console.log(animatedSprite.width + ' '+ animatedSprite.height)
+		animatedSprite.y = screenHeight - getDivisionSize(screenWidth)[1]*0.6;
+		console.log(screenWidth+' '+'yyy '+animatedSprite.y+' '+screenHeight+' '+getDivisionSize(screenWidth)[1]*0.6+ ' '+ getDivisionSize(screenWidth))
 		animatedSprite.anchor.set(0, 1);
-		animatedSprite.animationSpeed = 0.2;
-		animatedSprite.scale.x = 0.5;
-		animatedSprite.scale.y = 0.5;
+		animatedSprite.animationSpeed = 0.5;
+		animatedSprite.scale.x = (0.25*screenWidth)/614;
+		animatedSprite.scale.y = (0.20*screenWidth)/564;
 		animatedSprite.play();
-		
 	}
 
 	createBoy()
 	{
 		let boy = PIXI.Sprite.from('/png/Idle (1).png');
-		boy.scale.x = 0.5;
-		boy.scale.y = 0.5;
+		boy.scale.x = (0.25*screenWidth)/614;
+		boy.scale.y = (0.20*screenWidth)/564;
 		boy.anchor.set(0, 1);
 		boy.x = 100;
-		//console.log(boy.height);
-		boy.y = MapBuilder.WALL_HEIGHTS[0] + 50;
+		boy.y = screenHeight - getDivisionSize(screenWidth)[1]*0.6;
 
 		return boy;
 	}

@@ -1,0 +1,38 @@
+@font-face {
+	font-family: pixel;
+	src: url("/resources/INVASION2000.TTF");
+}
+
+.speech-bubble {
+	position: absolute;
+	font-family: pixel;
+	background: white;
+    border-radius: .4em;
+    bottom: 450px;
+    left: 350px;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    width: 200px;
+    border-style: dashed;
+    border-color: black;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0%;
+	width: 0;
+	height: 0;
+	border: 25px solid transparent;
+	border-right-color: white;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: 0.5px;
+	margin-left: -20px;
+}
+
+.hide{
+    display:none;
+}

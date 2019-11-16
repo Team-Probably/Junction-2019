@@ -13,7 +13,7 @@ function Walls() {
 Walls.prototype = Object.create(PIXI.Container.prototype);
 
 Walls.VIEWPORT_WIDTH = window.innerWidth;
-Walls.VIEWPORT_NUM_SLICES = Math.ceil(Walls.VIEWPORT_WIDTH / WallSlice.WIDTH) + 1;
+Walls.VIEWPORT_NUM_SLICES = Math.min(Math.ceil(Walls.VIEWPORT_WIDTH / WallSlice.WIDTH) + 1 ,25);
 
 Walls.prototype.setViewportX = function (viewportX) {
 	this.viewportX = this.checkViewportXBounds(viewportX);
@@ -70,7 +70,10 @@ Walls.prototype.addNewSlices = function () {
 
 			slice.sprite.position.x = firstX + (sliceIndex * WallSlice.WIDTH);
 			slice.sprite.position.y = slice.y;
-
+			x = getDivisionSize(screenWidth);
+			slice.sprite.width = x[0]
+			slice.sprite.height = x[1]
+			// console.log(slice.sprite.width);
 			this.addChild(slice.sprite);
 		}
 		else if (slice.sprite != null) {

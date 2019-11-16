@@ -3,7 +3,7 @@ function MapBuilder(walls) {
 }
 
 MapBuilder.WALL_HEIGHTS = [
-	400
+	window.innerHeight - WallSlice.HEIGHT*0.9
 ];
 
 MapBuilder.prototype.createMap = function() {
