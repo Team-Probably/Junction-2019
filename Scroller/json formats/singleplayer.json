@@ -1,0 +1,55 @@
+{
+    "data":[{
+        "dialouge":"Hey!! Welcome to CyberSafety",
+        "button":"Next",
+        "type":"intro"
+    },
+    {
+        "dialouge":"Worried to step in the world of internet?",
+        "button":"Next",
+        "type":"intro"
+    },
+    {
+        "dialouge":"Don't worry, Be Happy :)",
+        "button":"Next",
+        "type":"intro"
+    },
+    {
+        "dialouge":"We are her to help you through it :)",
+        "button":"Let's Begin",
+        "type":"intro"
+    },
+    {
+        "dialouge":"Let's begin with baby Steps",
+        "button":"Get Started",
+        "type":"signin"
+        
+    },
+    {
+        "dialouge":"Sign In!!",
+        "button":"Continue",
+        "type":"signin"
+    },
+    {
+        "dialouge":"To make your Experience better kindly provide the following permissions!",
+        "button":"Next",
+        "type":"signin"
+    },
+    {
+        "dialouge":"CyberSafety would like to use audio",
+        "button":["Allow","Decline"],
+        "type":"signin"
+    },
+    {
+        "dialouge":"CyberSafety would like to use video",
+        "button":["Allow","Decline"],
+        "type":"signin"
+    },
+    {
+        "dialouge":"Boom you've just gotten Bamboozled!!",
+        "button":"Wanna know why??",
+        "type":"signin"
+    }
+    ]
+
+}
