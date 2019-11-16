@@ -3,7 +3,7 @@ function SpeechBubble(text)
     this.container = new PIXI.Container();
     var padding = {x: 20, y: 10};
     var radius = 20;
-    var origin = {x: 150, y: 200};
+    var origin = {x: 0, y: 0};
     var tx = new PIXI.Text(text, {font: '30px sans-serif', fill: 0x000000, align: 'left', wordWrap: true, wordWrapWidth: 200});
     tx.position = {x: origin.x+padding.x, y: origin.y-padding.y};
     tx.anchor.set(0, 1);

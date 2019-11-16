@@ -11,9 +11,11 @@ class Main {
 
 		this.boy = this.createBoy();
 		this.speechcont =  SpeechBubble('Hiii This is some huge text text text text');
-		this.speechcont.x = 200;
+		this.speechcont.x = 350;
+		this.speechcont.y = 200;
 		this.stage.addChild(this.speechcont);
 
+		
 		var button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
 			this.moveforward();
 		});
@@ -32,6 +34,7 @@ class Main {
 		this.move = 100 * this.scrollSpeed;
 		this.wallsmoving = true;
 	}
+
 	update() {
 		this.scroller.moveViewportXBy(this.scrollSpeed);
 		// document.getElementById("mvforward").onmousedown =  () => {
@@ -42,6 +45,9 @@ class Main {
 		if (this.move == 0) {
 			this.scrollSpeed = 0;
 			this.wallsmoving = false;
+			console.log(this.scroller.getViewportX());
+
+			
 
 		} else {
 			this.move -= this.scrollSpeed;
@@ -61,6 +67,7 @@ class Main {
 		
 		requestAnimationFrame(this.update.bind(this));
 	}
+
 	loadSpriteSheet() {
 		var loader = PIXI.loader;
 		loader.add("wall", "resources/wall.json");
@@ -68,6 +75,7 @@ class Main {
 		loader.load();
 		
 	}
+
 	spriteSheetLoaded() {
 		this.scroller = new Scroller(this.stage);
 		requestAnimationFrame(this.update.bind(this));
@@ -111,5 +119,11 @@ class Main {
 		boy.y = MapBuilder.WALL_HEIGHTS[0] + 50;
 
 		return boy;
+	}
+
+	getScenePos()
+	{
+		return this.scroller.getViewportX() / 1000;
+
 	}
 }
