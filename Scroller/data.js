@@ -15,6 +15,16 @@ var speech = {
         "Before we go into the depth's of the interent, here's a little glimpse for you",
         "Every website you visit know's all of this about you"
         ],
+        "next": "transition",
+    },
+    "transition":
+    {
+        "dialogues": [
+        "Hence it shows that even without entering any data the sites get so much of information by just one visit. Thus, avoid shady sites.",
+        "You learn quick and I trust you to manage my own server",
+        "Take good care of it",
+        "See ya around!"
+        ],
         "next": "hack_info",
     },
     "data":[{

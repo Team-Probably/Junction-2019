@@ -3,6 +3,12 @@ var screenWidth = window.innerWidth;
 var scene = "intro";
 class Main {
 	constructor() {
+
+		this.glob =  {
+			            otpsent : false,
+			            signedin :localStorage.getItem('signedin'),
+			            otp : 0
+			        }
 		this.stage = new PIXI.Container();
 		this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { view: document.getElementById("game-canvas") });
 		this.scrollSpeed = 0;
@@ -13,6 +19,46 @@ class Main {
 
 		this.boy = this.createBoy();
 
+		
+
+		$('#next').on('click', () => {
+			console.log($('.current').next());
+			if($('.current').next().length)
+				$('.current')
+					.toggleClass('current')
+					.toggleClass('hide')
+					.next()
+					.toggleClass('current')
+					.toggleClass('hide');
+				else{
+						$('.info-cards').toggleClass('hide');
+						$('.speech-bubble').toggleClass('hide');
+						this.changeScene();
+				}
+		
+		})
+		
+		$('#prev').on('click',  ()=> {
+			if($('.current').prev().length)
+				$('.current')
+					.toggleClass('current')
+					.toggleClass('hide')
+					.prev()
+					.toggleClass('current')
+					.toggleClass('hide');
+		   
+		});
+
+		$('#game_init').click(()=>
+		{
+			$('.splash').css('display', 'none');
+			this.firstScene();
+		});
+
+	}
+
+	firstScene()
+	{
 		this.scene = "intro";
 		this.SpeechBubble(speech[this.scene]['dialogues'], this.scene);
 	}
@@ -34,13 +80,53 @@ class Main {
 		
 	login() {
 		$('.login-modal').toggleClass('hide');
-		$('.login-modal').on('click', () =>
-		{
-			console.log('login clicked');
-			$('.speech-bubble').toggleClass('hide');
-			$('.login-modal').toggleClass('hide');
-			this.changeScene();
-		});
+		// $('.login-modal').on('click', () =>
+		// {
+		// 	console.log('login clicked');
+		// 	$('.speech-bubble').toggleClass('hide');
+		// 	$('.login-modal').toggleClass('hide');
+		// 	this.changeScene();
+		// });
+		$('#submitemail').click(
+			(e) => {
+			if (!this.glob.otpsent){
+				var phone = $('#mobile').val();
+				phone = phone.replace('+', 'plus');
+				var email = $('#email').val();
+		
+				// fetch(
+				// 	`http://cors-anywhere.herokuapp.com/http://junction-probably.herokuapp.com/sendsms?phone=${phone}&email=${email}`
+				// ).then(res => res.json()).then(jsn => 
+				// 	{
+				// 		this.glob.otpsent=true;
+				// 		this.glob.otp = jsn.verification;
+				// 		$('#emailin').toggleClass('hide');
+				// 	$('#otpin').toggleClass('hide');
+		
+				// });
+
+				this.glob.otpsent=true;
+				this.glob.otp = jsn.verification;
+				$('#emailin').toggleClass('hide');
+				$('#otpin').toggleClass('hide');
+				
+			}
+			else{
+				if( $('#otp').val() == this.glob.otp || 1==1)
+				{
+					localStorage.setItem('signedin', true);
+					$('.login-modal').toggleClass('hide');
+					$('.speech-bubble').toggleClass('hide');
+					this.changeScene();
+					//signedin(true);
+					
+				}
+			}
+
+			
+		
+			}
+		)
 	}
 
 	signedin(status) {
@@ -67,6 +153,8 @@ class Main {
 					this.login();
 				if(scene=='signedin')
 					this.signedin(true);
+				if(scene=='transition')
+					this.woosh();
 			}
 		}).typewrite({
 				actions: typewriter_actions
@@ -150,5 +238,12 @@ class Main {
 	getScenePos()
 	{
 		return this.scroller.getViewportX() / 1000;
+	}
+
+	woosh()
+	{
+		console.log('wooooosh');
+		$('.woosh').addClass('animate');
+		$('.woosh').css('display', 'block');
 	}
 }

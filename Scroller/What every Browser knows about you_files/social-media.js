@@ -87,6 +87,9 @@
     function print(msg,color) {
         //document.getElementById('socialMedia').innerHTML += '<div style="color:'+color+';">'+msg + '</div>';
         console.log(msg+' '+color);
+        $('#websites_loggedin').append(
+            `<div class= "website_name">${msg}</div>`
+        )
     }
     networks.forEach(function(network) {
         var img = document.createElement('img');

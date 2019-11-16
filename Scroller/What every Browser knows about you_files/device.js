@@ -5,20 +5,34 @@
     var parser = new UAParser();
     if (parser.getDevice() && parser.getDevice().name) {
         // el.innerHTML += '<b>Device:</b> ' + JSON.stringify(parser.getDevice()) + '<br>';
-        console.log(JSON.stringify(parser.getDevice()));
+       var device = JSON.stringify(parser.getDevice());
+       
+        
     }
 
     // el.innerHTML += '<b>CPU:</b><br> '+navigator.platform+', ';
     if (parser.getCPU() && parser.getCPU().name) {
         // el.innerHTML += JSON.stringify(parser.getCPU()) + ' - ';
-        console.log(JSON.stringify(parser.getCPU()));
+        var cpu = JSON.stringify(parser.getCPU());
     }
-    cores = (navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' Cores' : '');
-    console.log(cores);
+    var cores = (navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' Cores' : '');
+    // console.log(cores);
 
-    os = parser.getOS().name + ' ' + parser.getOS().version ;
-    browser = parser.getBrowser().name + ' ' + parser.getBrowser().version;
-    console.log(browser);
+    var os = parser.getOS().name + ' ' + parser.getOS().version ;
+    var browser = parser.getBrowser().name + ' ' + parser.getBrowser().version;
+    // console.log(browser);
+    console.log($('#card1 #cardcontent'));
+    $('#card1 #cardcontent').html(
+        `
+        <div style="text-align: left; font-family: sans-serif; font-weight: 500; padding: 10px;">
+        <b>Device Name</b>: ${device} <br/>
+        <b>CPU</b>: ${cpu} <br/>
+        <b>Cores</b>: ${cores} <br/>
+        <b>OS</b>: ${os} <br/>
+        <b>Broswer</b>: ${browser} <br/>
+        </div>
+        `
+    )
 
 
     function updateBatteryStatus(battery) {
