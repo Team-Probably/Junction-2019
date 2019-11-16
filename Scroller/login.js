@@ -4,7 +4,7 @@ function login() {
     {
         console.log('login clicked');
         $('.login-modal').toggleClass('hide');
-        
-        signedin(true);
+        scene
+        SpeechBubble(speech[''])
     })
 }
