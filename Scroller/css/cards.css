@@ -74,6 +74,6 @@
     background-size: cover;
 }
 
-.greenbtn:focus{
+.greenbtn:active{
     background: url('/png/UI/PNG/green_button01.png') 0 0;
 }

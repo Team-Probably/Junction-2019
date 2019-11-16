@@ -33,6 +33,11 @@
     
 }
 
+#submitemail:active{
+   box-shadow: inset 0 0 10px #aaa;
+    
+}
+
 #map{
     width:200px;
     height:200px;
