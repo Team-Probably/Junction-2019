@@ -89,6 +89,7 @@ class Main {
 		loader.load();
 		
 	}
+
 	spriteSheetLoaded() {
 		this.scroller = new Scroller(this.stage);
 		requestAnimationFrame(this.update.bind(this));
@@ -131,5 +132,11 @@ class Main {
 		boy.y = screenHeight - getDivisionSize(screenWidth)[1]*0.6;
 
 		return boy;
+	}
+
+	getScenePos()
+	{
+		return this.scroller.getViewportX() / 1000;
+
 	}
 }
