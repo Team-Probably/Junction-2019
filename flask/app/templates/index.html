@@ -42,7 +42,7 @@ The actual snackbar -->
           <div class="mail-time">{{mail.time}}</div>
         </div>
         <div class="mail-content hide">
-          <div class="mail-info">Sent by Kittu to you at 11:14pm</div>
+          <div class="mail-info">From {{mail.sender}} &lt;{{mail.email}}&gt; to you at {{mail.time}}</div>
           <div class="mail-body">
             {{mail.content|safe}}
           </div>

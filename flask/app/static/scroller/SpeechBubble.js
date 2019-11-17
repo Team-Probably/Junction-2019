@@ -7,17 +7,17 @@ function SpeechBubble(text, type)
     // var typewriter = new Typewriter(type_bubble, {
     //     loop: false
     // });
-    
-    typewriter_actions = [{speed: 100}];//10
+
+    typewriter_actions = [{speed: 10}];//10
     for (var i = 0; i < text.length; i++) {
         typewriter_actions.push({type: text[i]});
-        typewriter_actions.push({delay: 20});//2000
+        typewriter_actions.push({delay: 2000});//2000
         typewriter_actions.push({remove: {num: text[i].length, type: 'whole'}});
     }
     typewriter_actions.pop();
     // typewriter.start();
     // return true;
-    
+
     $('.speech-bubble')
         .on('typewriteTyped', function (event, data) {
         if(data==text[text.length - 1]){

@@ -7,23 +7,9 @@ from pymongo import MongoClient
 import datetime
 
 from app import app
+from maildata import mail_data
 
 mongodb_uri = "mongodb://admin:pr0lly@ds018839.mlab.com:18839/junction"
-
-mails = {
-    'phishing':{
-            "sender": "Game Server",
-            "read_status": "unread",
-            "content": """Hey!<br>
-                I am Henry from Arrow Technologies. There is a slight change, from now on I would be your
-                point of contact for our company as we are increasing in size.
-                P.S.: Keep an eye on the inbox and beware of fake mails.""",
-            "time": "11.50",
-            "starred": True,
-            "id": 1,
-            "subject": "Here's your first Task"
-        }
-    }
 
 
 @app.route('/create_user')
@@ -36,6 +22,7 @@ def create_user():
 def entry():
     return render_template("entry.html")
 
+
 @app.route('/inbox')
 def inbox():
     user = get_user_info(1)
@@ -47,12 +34,11 @@ def update_mail():
     user_id = 1
     mail = request.form.to_dict()
     user = get_user_info(user_id)
-    print(mail)
     for i in range(len(user['mails'])):
         if int(user['mails'][i]['id']) == int(mail['id']):
             for key in mail:
-                if key=='starred':
-                    if mail[key].strip()=='star':
+                if key == 'starred':
+                    if mail[key].strip() == 'star':
                         user['mails'][i]['starred'] = False
                     else:
                         user['mails'][i]['starred'] = True
@@ -60,11 +46,32 @@ def update_mail():
                     user[key] = mail[key]
                 else:
                     user['mails'][i][key] = mail[key]
-        break
+            break
     db = connect().mails
-    db.update_one({'user_id': user_id}, {'$set': {'mails': user['mails'], 'fazer': user['fazer'], 'skills': user['skills']}})
+    db.update_one({'user_id': user_id}, {'$set': {
+                  'mails': user['mails'], 'fazer': user['fazer'], 'skills': user['skills']}})
+    new_mail = get_mail(user_id)
+    print(new_mail)
 
-    return redirect(url_for('inbox'))
+    if new_mail:
+        return jsonify(new_mail)
+    return 'false'
+
+
+def get_mail(user_id):
+    # user_id = 1
+    user = get_user_info(user_id)
+    for mail in user['mails']:
+        print(mail)
+        if mail['attack'] != 'done':
+            break
+    else:
+        user['mails'].insert(0, mail_data[len(user['mails'])-1])
+        db = connect().mails
+        db.update({'user_id': user_id}, {'$set': {'mails': user['mails']}})
+
+        return user['mails'][0]
+    return False
 
 
 def connect():
@@ -78,7 +85,8 @@ def add_mail(user_id, mail):
     mails = db.find_one({'user_id': user_id})
     if mails:
         mails['mails'].append(mail)
-        db.update_one({'user_id': user_id}, {'$set':{'mails': mails['mails']}})
+        db.update_one({'user_id': user_id}, {
+                      '$set': {'mails': mails['mails']}})
         return True
     else:
         return False
@@ -93,6 +101,7 @@ def add_user():
         'user_id': number,
         'mails': [{
             "sender": "Game Server",
+            "email":"game@teamprobably.com",
             "read_status": "unread",
             "content": """Howdy Hacker!
                 Welcome to KeyLock, a virtual world to help you understand about the various threats that can harm you on the internet,
@@ -108,9 +117,9 @@ def add_user():
                 You can also click on the Investigate button to know more about the information received and the ways to tackle the threats.
                 <br><br>
                 P.S.: Keep an eye on the inbox and beware of fake mails.""",
-            "time": "11.20",
+            "time": "10.30",
             "starred": True,
-            "id": 1,
+            "id": 0,
             "subject": "Click me!!!",
             "attack": True
         }],
@@ -121,17 +130,10 @@ def add_user():
                 "services": [{"name": "Anti-Spam", "level": "Level 1"}],
                 "health": 75,
                 "active_conns": 100,
-            },
-            {
-                "company_name": "Ericsson",
-                "name": "5G_Server",
-                "services": [],
-                "health": 75,
-                "active_conns": 1000,
             }
         ],
-        "skills": 30,
-        "fazer":70
+        "skills": 50,
+        "fazer": 30
     })
     print("User added")
     return True
