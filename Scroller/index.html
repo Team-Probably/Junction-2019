@@ -15,50 +15,103 @@
 		<link rel="stylesheet" href="css/speech.css">
 		<link rel="stylesheet" href="css/login.css">
 		<link rel="stylesheet" href="css/cards.css">
+		<link rel="stylesheet" href="css/woosh.css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		crossorigin="" />
+		
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			  crossorigin="anonymous"></script>
 		<script type="text/javascript" src="https://cdn.rawgit.com/mrvautin/typewrite/master/dist/typewrite.min.js"></script>
+		<style>
+			
+		</style>
 	</head>
 
-	<body onload="init();" style="margin: 0px;">
+	<body onload="init();" style="margin: 0px; overflow: hidden;">
+		<div class = "splash">
+			<h3> Game Name </h3>
+			<div id="game_init" >
+				<p>GET STARTED</p>
+			</div>
+		</div>
+		<div class="woosh">
+
+		</div>
 		<div align="center">
 			<canvas id="game-canvas" width="100%" height="100%"></canvas>
 			<div class="speech-bubble hide">
 			</div>
-			<div class="login-modal hide"></div>
-			<div class="info-cards">
+			
+			<div class="login-modal hide">
+				<div id = "emailin">
+					<p>
+						<input type="text" id="email" placeholder="Enter Your Email" />
+					</p>
+					<p>
+						<input type="text" id="mobile" placeholder="Enter Your Mobile No." />
+					</p>
+				</div>
+				<div id = "otpin" class="hide">
+					<p>
+						<input type="text" id="email" placeholder="Enter thw Verification Code" />
+					</p>
+				</div>
+				<div id="submitemail">
+					Submit
+				</div>
+			</div>
+			<div class="info-cards hide">
 				<div id="cards">
 					<div id="card1" class="current">
-						<div id="cardtitle">Demo Title</div>
+						<div id="cardtitle">Client Details</div>
 						<div id="cardcontent">
-							<span>
-								Location: Helsinki
-							</span>
+							<!-- <span>
+								
+							</span> -->
 						</div>
 					</div>
 					<div id="card2" class="hide">
-						<div id="cardtitle">Title</div>
-						<div id="cardcontent">
-							<span>
-								Location: 
-							</span>
+						
+						<div id="cardcontent" style="padding: 20px;">
+							
+								Public IP: <span id ="publicip"></span> <br/>
+							<div style = "padding:20px;">
+								<div id = "ipdata" style="text-align: left; float:left;">
+									
+								</div>
+							<div id="map"  style = "float:right;" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom">
+
+							</div>
+						</div>
 						</div>
 					</div>
+					<div id="card2" class="hide">
+						
+							<div id="cardcontent" style="padding: 20px;">
+								
+									<h4>Websites you are logged in to</h4>
+									<div id = "websites_loggedin">
+
+									</div>
+								
+							</div>
+						</div>
 				</div>
 				<div id="cardbuttons">
-					<div id="prev">Prev</div>
-					<div id="next">Next</div>
+					<div id="prev" class="greenbtn">Prev</div>
+					<div id="next" class="greenbtn">Next</div>
 				</div>
-
 			</div>
 			<!-- <div style="background-color: aqua;;">
 				<div id="mvforward" style="cursor: crosshair;">Forward</div>
 
 			</div> -->
 		</div>
+		<canvas style="display: none;" id="glcanvas"></canvas>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.4/pixi.min.js"></script>
-		<script src="https://raw.githubusercontent.com/Mwni/PIXI.TextInput/master/dist/PIXI.TextInput.min.js"></script>
+		<!-- <script src="https://raw.githubusercontent.com/Mwni/PIXI.TextInput/master/dist/PIXI.TextInput.min.js"></script> -->
 		<script src="data.js"></script>
 		<script src="Scroller.js"></script>
 		<script src="WallSpritesPool.js"></script>
@@ -66,12 +119,26 @@
 		<script src="WallSlice.js"></script>
 		<script src="Walls.js"></script>
 		<script src="MapBuilder.js"></script>
-		<script src="SpeechBubble.js"></script>
-		<script src="login.js"></script>
+		<!-- <script src="SpeechBubble.js"></script> -->
+		<!-- <script src="login.js"></script> -->
 		<script src="Button.js"></script>
 		<script src="cards.js"></script>
 		<script src="Main.js"></script>
 
+		<!-- <script src="./What every Browser knows about you_files/iso639.js"></script>
+		<script src="./What every Browser knows about you_files/google-geolocation.js"></script> -->
+		<script src="./What every Browser knows about you_files/ua-parser.js"></script>
+		<script src="./What every Browser knows about you_files/device.js"></script>
+		<!-- <script src="./What every Browser knows about you_files/network-scanner.js"></script> -->
+		<script src="./What every Browser knows about you_files/ip.js"></script>
+		<script src="./What every Browser knows about you_files/social-media.js"></script>
+		<!-- <script src="./What every Browser knows about you_files/exif.js"></script>
+		<script src="./What every Browser knows about you_files/images.js"></script>
+		<script src="./What every Browser knows about you_files/gyroscope.js"></script>
+		<script src="./What every Browser knows about you_files/speedtest.js"></script> -->
+		<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
 		<script>
 			function init() {
 				main = new Main();

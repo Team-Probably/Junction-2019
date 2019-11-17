@@ -1,9 +1,14 @@
 var screenHeight = window.innerHeight;
 var screenWidth = window.innerWidth;
-
+var scene = "intro";
 class Main {
 	constructor() {
-		
+
+		this.glob =  {
+			            otpsent : false,
+			            signedin :localStorage.getItem('signedin'),
+			            otp : 0
+			        }
 		this.stage = new PIXI.Container();
 		this.renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, { view: document.getElementById("game-canvas") });
 		this.scrollSpeed = 0;
@@ -14,37 +19,148 @@ class Main {
 
 		this.boy = this.createBoy();
 
-		this.scene = "intro";
-		console.log(speech);
-		SpeechBubble(speech['intro'], login);
 		
-		// this.button = Button('PLAY', {x: 350, y: 200}, 200, 100, ()=>{
-		// 		this.moveforward();
-		// 	});
-		this.stage.addChild(this.button);
+
+		$('#next').on('click', () => {
+			console.log($('.current').next());
+			if($('.current').next().length)
+				$('.current')
+					.toggleClass('current')
+					.toggleClass('hide')
+					.next()
+					.toggleClass('current')
+					.toggleClass('hide');
+				else{
+						$('.info-cards').toggleClass('hide');
+						$('.speech-bubble').toggleClass('hide');
+						this.changeScene();
+				}
+		
+		})
+		
+		$('#prev').on('click',  ()=> {
+			if($('.current').prev().length)
+				$('.current')
+					.toggleClass('current')
+					.toggleClass('hide')
+					.prev()
+					.toggleClass('current')
+					.toggleClass('hide');
+		   
+		});
+
+		$('#game_init').click(()=>
+		{
+			$('.splash').css('display', 'none');
+			this.firstScene();
+		});
 
 	}
 
-	// getScene() {
-	// 	if (this.dialogues[this.scene].type == 'intro') {
-	// 		this.button = Button('NEXT', {x: 350, y: 200}, 200, 100, ()=>{
-	// 				this.moveforward();
-	// 			});		
-	// 		SpeechBubble([this.dialogues[this.scene].dialogue]);
-	// 	}
-	// 	if (this.dialogues[this.scene].type == 'signup') {
+	firstScene()
+	{
+		this.scene = "intro";
+		this.SpeechBubble(speech[this.scene]['dialogues'], this.scene);
+	}
 
-	// 	}
-	// }
+	getScene() {
+		this.SpeechBubble(speech[this.scene]['dialogues'], this.scene);	
+	}
 
+	changeScene() {
+		this.scene = speech[this.scene]['next'];
+		this.moveforward();
+	}
+	
 	moveforward() {
 		this.scrollSpeed = 10;
 		this.move = 100 * this.scrollSpeed;
 		this.wallsmoving = true;
-		$('.speech-bubble').toggleClass('hide');
-		this.scene ++;
 	}
-	
+		
+	login() {
+		$('.login-modal').toggleClass('hide');
+		// $('.login-modal').on('click', () =>
+		// {
+		// 	console.log('login clicked');
+		// 	$('.speech-bubble').toggleClass('hide');
+		// 	$('.login-modal').toggleClass('hide');
+		// 	this.changeScene();
+		// });
+		$('#submitemail').click(
+			(e) => {
+			if (!this.glob.otpsent){
+				var phone = $('#mobile').val();
+				phone = phone.replace('+', 'plus');
+				var email = $('#email').val();
+		
+				// fetch(
+				// 	`http://cors-anywhere.herokuapp.com/http://junction-probably.herokuapp.com/sendsms?phone=${phone}&email=${email}`
+				// ).then(res => res.json()).then(jsn => 
+				// 	{
+				// 		this.glob.otpsent=true;
+				// 		this.glob.otp = jsn.verification;
+				// 		$('#emailin').toggleClass('hide');
+				// 	$('#otpin').toggleClass('hide');
+		
+				// });
+
+				this.glob.otpsent=true;
+				this.glob.otp = jsn.verification;
+				$('#emailin').toggleClass('hide');
+				$('#otpin').toggleClass('hide');
+				
+			}
+			else{
+				if( $('#otp').val() == this.glob.otp || 1==1)
+				{
+					localStorage.setItem('signedin', true);
+					$('.login-modal').toggleClass('hide');
+					$('.speech-bubble').toggleClass('hide');
+					this.changeScene();
+					//signedin(true);
+					
+				}
+			}
+
+			
+		
+			}
+		)
+	}
+
+	signedin(status) {
+		$('.info-cards').toggleClass('hide');
+		console.log("hello");
+	}
+
+	SpeechBubble(text, scene){
+		$('.speech-bubble').toggleClass('hide');
+
+		let typewriter_actions = [{speed: 100}];//10
+		for (var i = 0; i < text.length; i++) {
+			typewriter_actions.push({type: text[i]});
+			typewriter_actions.push({delay: 20});//2000
+			typewriter_actions.push({remove: {num: text[i].length, type: 'whole'}});
+		}
+		typewriter_actions.pop();
+		
+		$('.speech-bubble')
+			.on('typewriteTyped', (event, data) => {
+			if(data==text[text.length - 1]){
+				console.log("Speech completed", scene);
+				if(scene=='intro')
+					this.login();
+				if(scene=='signedin')
+					this.signedin(true);
+				if(scene=='transition')
+					this.woosh();
+			}
+		}).typewrite({
+				actions: typewriter_actions
+			});
+	}
+
 	update() {
 		this.scroller.moveViewportXBy(this.scrollSpeed);
 		if (this.move == 0 && this.wallsmoving==true) {
@@ -122,6 +238,12 @@ class Main {
 	getScenePos()
 	{
 		return this.scroller.getViewportX() / 1000;
+	}
 
+	woosh()
+	{
+		console.log('wooooosh');
+		$('.woosh').addClass('animate');
+		$('.woosh').css('display', 'block');
 	}
 }
