@@ -33,32 +33,38 @@ def create_user():
 
 
 @app.route('/')
+def entry():
+    return render_template("entry.html")
+
+@app.route('/inbox')
 def inbox():
     user = get_user_info(1)
-    return render_template("index.html", mails=user['mails'], servers=user['servers'])
+    return render_template("index.html", mails=user['mails'], servers=user['servers'], skills=user['skills'], fazer=user['fazer'])
 
 
 @app.route('/update_mail', methods=['POST'])
 def update_mail():
     user_id = 1
     mail = request.form.to_dict()
-    mails = get_user_info(user_id)
-
-    for i in range(len(mails)):
-        if int(mails[i]['id']) == int(mail['id']):
+    user = get_user_info(user_id)
+    print(mail)
+    for i in range(len(user['mails'])):
+        if int(user['mails'][i]['id']) == int(mail['id']):
             for key in mail:
                 if key=='starred':
                     if mail[key].strip()=='star':
-                        mails[i]['starred'] = False
+                        user['mails'][i]['starred'] = False
                     else:
-                        mails[i]['starred'] = True
+                        user['mails'][i]['starred'] = True
+                elif key in ['fazer', 'skills']:
+                    user[key] = mail[key]
                 else:
-                    mails[i][key] = mail[key]
+                    user['mails'][i][key] = mail[key]
         break
     db = connect().mails
-    db.update_one({'user_id': user_id}, {'$set': {'mails': mails}})
+    db.update_one({'user_id': user_id}, {'$set': {'mails': user['mails'], 'fazer': user['fazer'], 'skills': user['skills']}})
 
-    return render_template("index.html", mails=mails)
+    return redirect(url_for('inbox'))
 
 
 def connect():
@@ -124,8 +130,8 @@ def add_user():
                 "active_conns": 1000,
             }
         ],
-        "skills": 10,
-        "fazer": 100
+        "skills": 30,
+        "fazer":70
     })
     print("User added")
     return True

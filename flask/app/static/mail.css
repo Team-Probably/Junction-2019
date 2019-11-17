@@ -112,6 +112,10 @@ html, body{
     cursor: pointer;
 }
 
+.action3{
+    cursor: pointer;
+}
+
 .main-container{
     display: grid;
     width: 80%;

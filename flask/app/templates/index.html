@@ -28,6 +28,7 @@ The actual snackbar -->
       {% for mail in mails %}
       <div class="mail" id="{{mail.id}}">
         <div class="mail-header  {{mail.read_status}}">
+          <div class="mail-attack hide">{{mail.attack}}</div>
           <div class="star"><i class="material-icons">
             {% if mail.starred %}
               star
@@ -42,18 +43,20 @@ The actual snackbar -->
         </div>
         <div class="mail-content hide">
           <div class="mail-info">Sent by Kittu to you at 11:14pm</div>
-          <div class="mail-attack hide">{{mail.attack}}</div>
           <div class="mail-body">
             {{mail.content|safe}}
           </div>
           <div class="action-buttons">
-            <i class="material-icons action1">
+            <i class="material-icons action1" onclick="hint({{mail.id}})"
+            data-toggle="tooltip" title="Investigate">
               account_tree
             </i>
-            <i class="material-icons action2">
+            <i class="material-icons action2" onclick="cancel({{mail.id}})"
+            data-toggle="tooltip" title="Ignore Mail">
               cancel
             </i>
-            <i class="material-icons action3">
+            <i class="material-icons action3" onclick="defend({{mail.id}})"
+            data-toggle="tooltip" title="Take Suggested Actions">
               adb
             </i>
           </div>

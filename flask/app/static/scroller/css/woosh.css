@@ -1,0 +1,119 @@
+.woosh{
+height: 100%;
+width: 100%;
+box-sizing: border-box;
+z-index: 9999;
+display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.animate{
+    
+    background: linear-gradient(-45deg,  #DF7B26, #733C6E,  #000000, #00000000);
+    background-size: 400% 400%;
+    
+    -webkit-animation: anim 31s ease forwards;
+    -moz-animation: anim 31s ease forwards;
+    animation: anim 31s ease forwards;
+    transition: all 2s;
+
+   
+}
+
+@-webkit-keyframes anim {0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:100% 51%;}
+}
+@-moz-keyframes anim {
+0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:100% 51%;}
+}
+@keyframes anim {
+0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:100% 51%;}
+}
+
+.splash{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 5;
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+        
+        background: linear-gradient(-45deg, #733C6E,  #000000, #000000);
+        background-size: 400% 400%;
+        
+        -webkit-animation: splashanim 5s ease infinite;
+        -moz-animation: splashanim 5s ease infinite;
+        animation: splashanim 5s ease infinite;
+        transition: all 2s;
+    
+       
+    }
+@-webkit-keyframes splashanim {0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:0% 50%;}
+}
+@-moz-keyframes splashanim {
+0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:0% 50%;}
+}
+@keyframes splashanim {
+0%{background-position:0% 50%;}
+50%{background-position:100% 51%;}
+100%{background-position:0% 50%;}
+}
+
+#game_init{
+    margin: auto;
+    border: 10px white;
+    /* height: 100px; */
+    /* width: 1000px; */
+    font-family: pixel;
+    padding: 25px;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .5s linear;
+
+
+}
+
+#game_init:hover{
+    background-color: white;
+}
+
+#game_init > p{
+    z-index: 99;
+    color:#fff;
+}
+
+
+
+
+  #game_init:hover p{
+    color: rgb(0, 0, 0);
+    
+  }
+
+.splash > h3{
+    text-align: center;
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    margin-top: 20vh;
+    color: white;
+  }

@@ -1,0 +1,44 @@
+.login-modal{
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    width: 40%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.808);
+    border: 3px solid white;
+    box-shadow: inset 0px 0px 10px  rgb(0, 12, 53);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.login-modal input{
+    padding: 20px;
+    border: 2px solid rgb(255, 255, 179);
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: inset 0px 0px 10px 2px rgb(53, 53, 53);
+    color: black;
+
+}
+
+#submitemail{
+    background: #ffffff;
+    width:100px;
+    padding: 30px;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius:10px;
+    cursor: pointer;
+    
+}
+
+#submitemail:active{
+   box-shadow: inset 0 0 10px #aaa;
+    
+}
+
+#map{
+    width:200px;
+    height:200px;
+}
