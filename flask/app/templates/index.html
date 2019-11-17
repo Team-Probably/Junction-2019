@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Hacker{% endblock %}
+{% block body %}
+<!-- <button onclick="showToast(text)">Show Snackbar</button>
+
+
+The actual snackbar -->
+<!-- <div id="snackbar">New Mail</div> -->
+
+{% include 'stats.html' %}
+
+
+<div class="mail-cont">
+  <div class="mail-title">
+    <div class="mail-icon">
+      <i class="material-icons">email</i>Mail
+    </div>
+
+
+    <!-- The actual snackbar -->
+    <div id="snackbar"><Str></Str></div>
+    <div class="mail-type">Inbox<i class="material-icons">
+      expand_more
+    </i></div>
+  </div>
+  <div class="mailbox">
+    <div class="mails">
+      {% for mail in mails %}
+      <div class="mail" id="{{mail.id}}">
+        <div class="mail-header  {{mail.read_status}}">
+          <div class="star"><i class="material-icons">
+            {% if mail.starred %}
+              star
+            {% else %}
+              star_border
+            {% endif %}
+            </i>
+          </div>
+          <div class="sender">{{mail.sender}}</div>
+          <div class="mail-subject">{{mail.subject}}</div>
+          <div class="mail-time">{{mail.time}}</div>
+        </div>
+        <div class="mail-content hide">
+          <div class="mail-info">Sent by Kittu to you at 11:14pm</div>
+          <div class="mail-attack hide">{{mail.attack}}</div>
+          <div class="mail-body">
+            {{mail.content|safe}}
+          </div>
+          <div class="action-buttons">
+            <i class="material-icons action1">
+              account_tree
+            </i>
+            <i class="material-icons action2">
+              cancel
+            </i>
+            <i class="material-icons action3">
+              adb
+            </i>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% include 'game.html' %}
+
+{% endblock %}

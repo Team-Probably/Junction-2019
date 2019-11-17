@@ -1,0 +1,50 @@
+{% block game %}
+<div class="simulation">
+    <div class="simspace">
+        <div class="drop-server">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Server: <span class="selection">{{servers[0].name}}</span><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    {% for server in servers %}
+                        <li><a href="#">{{server.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% for server in servers %}
+            <div class="server-data server{{server.name}}">
+                <div class="server-info">
+                    <div class="server-da server-name">Company Name: <span>{{server.company_name}}</span></div>
+                    <div class="server-da server-health">
+                        Server Health
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100" style="width: {{server.health}}%"></div>
+                        </div>
+                    </div>
+                    <div class="server-da server-connections">
+                        Active Connections: <span>{{server.active_conns}}</span>
+                    </div>
+                    {% if server.services %}
+                        <div class="server-da server-services">
+                            Services:
+                            {% for service in server.services %}
+                            <div class="service">{{service.name}}<span>{{service.level}}</span></div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="server-da server-services">
+                            Services: <span>None</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="server-img">
+                    <img src="{{ url_for('static', filename='images/server.png') }}" alt="Smiley face" width="64">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

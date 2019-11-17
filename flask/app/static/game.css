@@ -1,0 +1,77 @@
+.simulation{
+    background-color: #2C2F33;
+    margin-top: 100px;
+    margin-left:5%;
+    max-height: 400px;
+    height: max-content;
+}
+
+.simspace{
+    width: 100%;
+}
+
+.btn-group,.btn-default, .dropdown-menu{
+    width: 100%;
+    border-radius: 0px;
+    text-align: center;
+    font-size: 17px;
+    color: black;
+    text-decoration: none;
+}
+
+a{
+    color: black;
+}
+
+.server-data{
+    background-color: #2C2F33;
+    height: 300px;
+}
+
+.server-info{
+    color: white;
+    font-size: 13px;
+    padding: 15px;
+    font-weight: bold;
+}
+
+span{
+    font-weight: normal;
+}
+
+.server-da{
+    margin: 5px;
+}
+
+.server-health{
+    display: block;
+}
+
+.service{
+    width: 100%;
+    margin-left: 15px;
+}
+
+.server-img{
+    margin-right:25px;
+
+}
+
+.server-img>img{
+    float: right;
+    filter: invert(100%);
+}
+
+.server-data{
+    display: none;
+}
+
+.skills{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    color: white;
+}
+
+.skill{
+    padding-right: 25px;
+}

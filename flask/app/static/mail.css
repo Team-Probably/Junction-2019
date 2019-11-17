@@ -1,0 +1,128 @@
+html, body{
+    background-color: #7289DA;
+    width: 100vw;
+    overflow-x: hidden;
+    height: auto;
+}
+
+.mail-cont{
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    background-color: #2C2F33;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.mail-title{
+    /* margin: auto; */
+    width:100%;
+    border-bottom: 1px solid grey;
+    display: flex;
+}
+
+.mail-icon {
+    font-size: 24px;
+}
+
+.mail-icon > .material-icons{
+    color: rgb(67, 231, 67);
+    border: 2px solid rgb(67, 231, 67);
+    border-radius: 50%;
+    padding:5px;
+    margin: 15px;
+}
+.mail-type{
+    float: right;
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: 25px;
+    vertical-align: center;
+    cursor: pointer;
+}
+
+.mail-header{
+    display: grid;
+    grid-template-columns: 50px 100px auto 40px;
+    padding:4px;
+    font-size: 14px;
+    vertical-align: center;
+    cursor: pointer;
+}
+
+.unread{
+    font-weight: bold;
+}
+
+.unread{
+    background-color: rgba(128, 128, 128, 0.143);
+}
+
+.star{
+    color: yellow;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.sender{
+    margin-right: 15px;
+}
+.mail-subject{
+    margin-right: 15px;
+}
+
+.mail-content{
+    grid-column: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom:10px;
+    margin-left: 35px;
+    border-left: 1px solid whitesmoke;
+    padding-left: 10px;
+
+}
+
+.mail-info{
+    background-color: rgba(197, 188, 188, 0.226);
+    width: max-content;
+    margin-bottom: 15px;
+}
+
+.action-buttons{
+    margin-top: 15px;
+    border-top: 1px solid whitesmoke;
+    font: 14px;
+    width:100%;
+    display: block;
+}
+
+.action-buttons>.material-icons{
+    float: right;
+    margin-right:15px;
+    margin-top: 5px;
+}
+
+.action1{
+    cursor: pointer;
+}
+
+.action2{
+    cursor: pointer;
+}
+
+.main-container{
+    display: grid;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: 65% 35%;
+}
+
+.stats{
+    grid-column: 1/ 3;
+}
+
+.hide{
+    display: none;
+}

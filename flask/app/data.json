@@ -1,0 +1,22 @@
+{
+    "mails": [
+        {
+            "sender": "Kittu",
+            "read_status": "read",
+            "content": "xfchgvjhkjhvgna askduvas ausfvaas asgd gabfaosf",
+            "time": "11.20",
+            "starred": true,
+            "id": "1",
+            "subject": "Reminder"
+        },
+        {
+            "sender": "Miyoko",
+            "read_status": "read",
+            "content": "xfchgvjhkjhvgna askduvas ausfvaas asgd gabfaosf",
+            "time": "11.15",
+            "starred": true,
+            "id": "2",
+            "subject": "Not Important"
+        }
+    ]
+}

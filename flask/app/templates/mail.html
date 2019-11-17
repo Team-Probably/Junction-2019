@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Mail Inbox{% endblock %}
+{% block body %}
+{% for mail in mails %}
+    <div class="mail {{mail.read_status}}">
+        <div class="star"><i class="material-icons">
+            {% if mail.starred %}
+                star_border
+            {% else %}
+    star
+            {% endif %}
+            </i>
+        </div>
+        <div class="sender">{{mail.sender}}</div>
+        <div class="mail-subject">{{mail.subject}}</div>
+        <div class="mail-time">{{mail.time}}</div>
+        <div class="mail-content">{{mail.content}}</div>
+    </div>
+{% endfor %}
+
+Click me!!!
+
+Howdy Hacker!
+Welcome to KeyLock, a virtual world to help you understand about the various threats that can harm you on the internet,
+defend yourself in the real world against such cyber attacks. You'll get to know more about these attacks as you go further
+through the game.
+
+You are a Cybersecurity Professional with contracts from various popular companies to manage and protect their servers from various potential threats.
+
+Let's begin by exploring the virtual world. As you might have realized, this is a mail server wherein you'll receive the mails of the various companies.
+
+To proceed further, click on the Take Action button below or click on the Ignore button to quit.
+You can also click on the Investigate button to know more about the information received and the ways to tackle the threats.
+
+P.S.: Keep an eye on the inbox and beware of fake mails.
+
+
+I am Henry from Arrow Technologies. There is a slight change, from now on I would be your
+point of contact for our company as we are increasing in size.
+
+I would like you to share a few details regarding the credentials of the servers under your control in the following form
+so that I can connect to them remotely
